@@ -42,3 +42,20 @@ func is_corrupted() -> bool:
 		if use < 0.5:
 			return false
 	return true
+	
+func to_dict() -> Dictionary:
+	var dict = {
+		"corruption":corruption,
+		"purity":purity,
+		"usage_corrupt":usage_corrupt,
+		"usage_pure":usage_pure
+	}
+	return dict
+		
+func from_dict(data:Dictionary) -> void:
+	corruption = data.get("corruption", int(corruption))
+	purity = data.get("purity", int(purity))
+	usage_corrupt = data.get("usage_corrupt", int(usage_corrupt))
+	usage_pure = data.get("usage_pure", int(usage_pure))
+	
+	
