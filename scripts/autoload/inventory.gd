@@ -78,3 +78,23 @@ func parse_paths() -> Dictionary:
 					pp += worth
 	return {"pp":pp, "cp":cp}
 	
+func to_dict() -> Dictionary:
+	var dict = {
+	"resources":{
+		"corrupted_scrap":corrupted_scrap,
+		"purified_scrap":purified_scrap, 
+		"corrupt_ingots":corrupt_ingots, 
+		"pure_ingots":pure_ingots
+		},
+	"unlocked_equipment":unlocked_equipment.duplicate(true), 
+	"current_equipment":current_equipment.duplicate(true)
+	}
+	
+	return dict
+	
+func from_dict(data:Dictionary) -> void:
+	var resources = data.get("resources", {})
+	for item in resources:
+		set(item,int(resources[item]))
+	unlocked_equipment = data.get("unlocked_equipment", unlocked_equipment).duplicate(true)
+	current_equipment = data.get("current_equipment", current_equipment).duplicate(true)
