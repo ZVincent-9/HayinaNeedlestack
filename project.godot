@@ -11,8 +11,18 @@ config_version=5
 [application]
 
 config/name="Hay in a Needlestack"
+run/main_scene="uid://exyhjphlftkm"
 config/features=PackedStringArray("4.7", "Forward Plus")
+run/max_fps=250
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameState="*uid://p5ffv2hkk5md"
+Inventory="*uid://djs0yssbb038p"
+PathScore="*uid://cxp1w4cwfrlqu"
+Talisman="*uid://dwu8vtnqg2aqd"
+SaveIo="*uid://ck2oinjqihoxb"
 
 [display]
 

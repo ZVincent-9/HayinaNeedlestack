@@ -26,20 +26,11 @@ func is_corrupted() -> bool:
 	var has_usage = false
 	if (corruption + purity) > 0:
 		has_choices = true
-		if corruption > 0 and purity > 0:
-			choice = float(corruption) / (purity + corruption)
-		elif corruption > 0:
-			choice = 1.0
-		else:
-			choice = 0.0
+		choice = float(corruption) / (purity + corruption)
+
 	if (usage_corrupt + usage_pure) > 0:
 		has_usage = true
-		if usage_corrupt > 0 and usage_pure > 0:
-			use = float(usage_corrupt) / (usage_pure + usage_corrupt)
-		elif usage_corrupt > 0:
-			use = 1.0
-		else:
-			use = 0.0
+		use = float(usage_corrupt) / (usage_pure + usage_corrupt)
 		
 	if has_choices and has_usage:
 		if (choice + use) / 2 < 0.5:
