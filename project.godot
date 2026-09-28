@@ -22,7 +22,7 @@ GameState="*uid://p5ffv2hkk5md"
 Inventory="*uid://djs0yssbb038p"
 PathScore="*uid://cxp1w4cwfrlqu"
 Talisman="*uid://dwu8vtnqg2aqd"
-SaveIo="*uid://ck2oinjqihoxb"
+SaveIO="*uid://ck2oinjqihoxb"
 
 [display]
 
