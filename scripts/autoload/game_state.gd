@@ -49,3 +49,8 @@ func load_game() -> bool:
 	else:
 		return false
 		
+func respawn() -> void:
+	if flags.get("walkback", false):
+		return
+	save_game()
+	#TODO make scenes + scene change

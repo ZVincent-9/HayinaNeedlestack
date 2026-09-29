@@ -6,6 +6,8 @@ var shattered := false
 func give() -> void:
 	given = true
 	GameState.flags["talisman_given"] = true
+	GameState.location["tier"] = "hub"
+	GameState.location["spawn"] = "bedside"
 
 func shatter() -> void:
 	shattered = true
@@ -16,11 +18,11 @@ func can_warp() -> bool:
 	
 	
 func on_player_died() -> void:
-	if !can_warp():
-		return
-	Inventory.drop_raw_scrap()
-	GameState.save_game()
-	#TODO: Scene change/respawn management
+	if can_warp():
+		Inventory.drop_raw_scrap()
+		GameState.save_game()
+	GameState.respawn()
+	
 	
 func to_dict() -> Dictionary:
 	return {
