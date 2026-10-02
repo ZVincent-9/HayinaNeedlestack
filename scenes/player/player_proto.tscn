@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://ducjb0majhsb4"]
+
+[ext_resource type="Script" uid="uid://c714cayf5dpo4" path="res://scenes/player/player.gd" id="1_8afob"]
+[ext_resource type="Script" uid="uid://cr1yc2deppiok" path="res://scripts/input_component.gd" id="2_dovo2"]
+[ext_resource type="Script" uid="uid://bag2t8jcu2qcf" path="res://scripts/camera_spring_arm.gd" id="2_p47bc"]
+[ext_resource type="Script" uid="uid://dw0mix6yxs5lj" path="res://scripts/camera_follow.gd" id="3_75vfm"]
+[ext_resource type="Script" uid="uid://csvsw0ww5mcqr" path="res://scripts/movement_component.gd" id="3_gmlin"]
+[ext_resource type="Script" uid="uid://0vv6byv176av" path="res://scripts/health_component.gd" id="4_lvxji"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7p2l"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8afob"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_75vfm"]
+radius = 0.3
+
+[node name="Player" type="CharacterBody3D" unique_id=310857974]
+collision_layer = 2
+collision_mask = 253
+script = ExtResource("1_8afob")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1256373762]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_x7p2l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=1731365819]
+mesh = SubResource("CapsuleMesh_8afob")
+
+[node name="CameraAnchor" type="Node3D" parent="." unique_id=1903011161]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+script = ExtResource("2_p47bc")
+min_vertical_angle = -1.5533430342749532
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraAnchor" unique_id=2013352611]
+collision_mask = 165
+shape = SubResource("SphereShape3D_75vfm")
+spring_length = 6.0
+
+[node name="SpringPos" type="Node3D" parent="CameraAnchor/SpringArm3D" unique_id=671555617]
+
+[node name="Camera3D" type="Camera3D" parent="CameraAnchor" unique_id=754189958 node_paths=PackedStringArray("spring_arm")]
+script = ExtResource("3_75vfm")
+spring_arm = NodePath("../SpringArm3D/SpringPos")
+
+[node name="InputComponent" type="Node" parent="." unique_id=198406080]
+unique_name_in_owner = true
+script = ExtResource("2_dovo2")
+metadata/_custom_type_script = "uid://cr1yc2deppiok"
+
+[node name="MovementComponent" type="Node" parent="." unique_id=9283456 node_paths=PackedStringArray("body", "model")]
+unique_name_in_owner = true
+script = ExtResource("3_gmlin")
+body = NodePath("..")
+model = NodePath("../CollisionShape3D/MeshInstance3D")
+metadata/_custom_type_script = "uid://csvsw0ww5mcqr"
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1114278898]
+unique_name_in_owner = true
+script = ExtResource("4_lvxji")
+metadata/_custom_type_script = "uid://0vv6byv176av"
